@@ -34,7 +34,6 @@
                        v-model="payment.date_in" required>
                         <span class="validity"></span>
                     </div>
-                    
                 </form>
             </div>
 

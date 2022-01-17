@@ -53,21 +53,22 @@
             <img src="../../assets/img/user-icon.png" alt="gambar user" class="mb-5 mt-3" height="140" width="140">
             <h3 class="text-dark ">Users</h3>
             <h3 class="text-dark ">4</h3>
-            <p>{{users}}</p>
+            <p>{{ users.count }}</p>
             </router-link>
           </div>
           <div class="col-3 ml-5 mt-5 dashboard-icon text-center">
             <router-link to="/order">
             <img src="../../assets/img/order-icon.png" alt="" class="mb-5 mt-3" height="140" width="140">
             <h3 class="text-dark">Order Now</h3>
-            <h3 class="text-dark">2</h3>
+            <h3 class="text-dark">{{ jumlahOrder }}</h3>
             </router-link>
           </div>
           <div class="col-3 ml-5 mt-5 dashboard-icon text-center">
             <router-link to="/product">
             <img src="../../assets/img/car-icon.png" alt="" class="mb-5 mt-3" height="140" width="140">
             <h3 class="text-dark">Product Available</h3>
-            <h3 class="text-dark">2</h3>
+            <!-- <h3 class="text-dark">3</h3> -->
+            <h3 class="text-dark">{{ jumlahProduct }}</h3>
             </router-link>
           </div>
         </div>
@@ -92,29 +93,49 @@
 
 
 
-
+import axios from "axios"
 
 export default {
-    name : 'Dashboard',
-    
-    
-    // ,
-    // data() {
-    //   return {
-    //     users: 0
-    //   }
-    // },
-    // methods: {
-    //   getUsers() {
-    //     try {
-    //       const response = await axios.get('/users')
-    //       this.users = response.data.length
-    //     } catch(err) {
-    //       console.log(err)
-    //     }
-    //   }
-    // }
-}
+    name: "Dashboard",
+  data() {
+    return {
+      users: [],
+      jumlahProduct : '',
+      jumlahOrder : '',
+      // currentUkm : null,
+    };
+  },
+
+
+  methods: {
+    setUsers(data) {
+      this.users = data;
+    },
+
+    setProducts(data){
+      this.jumlahProduct = data.length;
+    },
+
+    setPayments(data){
+      this.jumlahOrder = data.length;
+    }
+
+  },
+  mounted() {
+    axios
+        .get("http://localhost:8080/api/payments")
+        .then((response) => this.setPayments(response.data))
+        .catch((error) => console.log(error));
+    axios
+      .get("http://localhost:8080/api/products")
+      .then((response) => this.setProducts(response.data))
+      .catch((error) => console.log(error));
+    // axios
+    //   .get("http://localhost:8080/api/test/count")
+    //   .then((response) => this.setUsers(response.data))
+    //   .catch((error) => console.log(error));
+  },
+};
 </script>
 
 

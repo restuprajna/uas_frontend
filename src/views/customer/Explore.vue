@@ -61,9 +61,14 @@
             </h3>
             <h2>Rp.3.500.000</h2>
           </div>
-          <button class="item-detail" v-on:click="addToCart">
+          
+            <router-link  to="/billing">
+              <button class="item-detail" v-on:click="addToCart">
             <b>rent now</b>
-          </button>
+             </button>
+            </router-link>
+         
+          
           <button class="item-detail-cancel" v-on:click="removeFromCart">
             <b>cancel</b>
           </button>
@@ -81,9 +86,11 @@
             </h3>
             <h2>Rp.4.500.000</h2>
           </div>
-          <button class="item-detail" v-on:click="addToCart">
+          <router-link  to="/billing">
+              <button class="item-detail" v-on:click="addToCart">
             <b>rent now</b>
-          </button>
+             </button>
+            </router-link>
           <button class="item-detail-cancel" v-on:click="removeFromCart">
             <b>cancel</b>
           </button>
@@ -110,6 +117,7 @@ export default {
     
     Footer
   },
+  props: ["cart"],
 };
 </script>
 
